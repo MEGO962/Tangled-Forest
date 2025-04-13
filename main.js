@@ -728,6 +728,7 @@ nightModeButton.addEventListener('click', () => {
 
 // Music toggle
 const music = document.getElementById('background-music');
+music.volume = 1.0; // Set volume to 100% (maximum)
 const musicToggle = document.getElementById('music-toggle');
 musicToggle.addEventListener('click', () => {
     if (music.paused) {
@@ -737,6 +738,34 @@ musicToggle.addEventListener('click', () => {
         music.pause();
         musicToggle.textContent = "Play Music";
     }
+});
+
+// Volume control
+const volumeUpBtn = document.getElementById('volume-up');
+volumeUpBtn.addEventListener('click', () => {
+    // Increase volume by 20% each click, up to a maximum of 500%
+    // This uses the AudioContext API to boost volume beyond the standard 100% limit
+    if (!window.audioCtx) {
+        // Create audio context and connect to the audio element
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const source = audioCtx.createMediaElementSource(music);
+        const gainNode = audioCtx.createGain();
+        source.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+        
+        // Store the gain node for future volume adjustments
+        window.audioCtx = audioCtx;
+        window.gainNode = gainNode;
+        window.currentGain = 1.0;
+    }
+    
+    // Increase the gain (volume)
+    window.currentGain += 0.5;
+    if (window.currentGain > 5) window.currentGain = 5; // Cap at 500%
+    window.gainNode.gain.value = window.currentGain;
+    
+    // Update button text
+    volumeUpBtn.textContent = `Volume: ${Math.round(window.currentGain * 100)}%`;
 });
 
 // Animation loop with performance optimizations
