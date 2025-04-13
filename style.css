@@ -1,0 +1,465 @@
+/* Base styles */
+body {
+    margin: 0;
+    overflow-x: hidden;
+    height: 2000vh; /* Long scrollable page */
+    background: linear-gradient(#D8BFD8, #FFD700, #4682B4); /* Purple to gold to blue */
+    font-family: 'Amatic SC', cursive;
+    -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
+    overscroll-behavior: contain; /* Prevent overscroll effects */
+}
+
+#container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    touch-action: none; /* Prevent default touch behaviors */
+}
+
+/* Button styles */
+#night-mode, #music-toggle {
+    position: fixed;
+    padding: 12px 18px;
+    z-index: 10;
+    background: rgba(255, 215, 0, 0.7);
+    border: 2px solid #4B0082;
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: 'Amatic SC', cursive;
+    font-size: 18px;
+    color: #4B0082;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    -webkit-tap-highlight-color: transparent;
+    min-width: 100px; /* Ensure buttons are large enough for touch */
+    -webkit-appearance: none; /* Remove default styling on iOS */
+    appearance: none; /* Standard property for cross-browser compatibility */
+    touch-action: manipulation; /* Improve touch response */
+}
+
+#night-mode {
+    top: 20px;
+    right: 20px;
+}
+
+#music-toggle {
+    top: 20px;
+    left: 20px;
+}
+
+#night-mode:hover, #music-toggle:hover {
+    background: rgba(255, 215, 0, 0.9);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+#night-mode:active, #music-toggle:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Image styles */
+.photo-pair {
+    position: fixed;
+    z-index: 5;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+.left-pic, .right-pic {
+    position: absolute;
+    width: 200px;
+    height: auto;
+    opacity: 0;
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+.left-pic {
+    left: -250px;
+    top: 20%;
+    transform: translateX(0);
+}
+
+.right-pic {
+    right: -250px;
+    top: 20%;
+    transform: translateX(0);
+}
+
+/* Active state for photo pairs */
+.photo-pair.active .left-pic {
+    opacity: 1;
+    transform: translateX(250px);
+}
+
+.photo-pair.active .right-pic {
+    opacity: 1;
+    transform: translateX(-250px);
+}
+
+.photo-pair.active {
+    opacity: 1;
+}
+
+/* Position variations for each photo pair */
+#photo-pair-1 .left-pic { top: 15%; }
+#photo-pair-1 .right-pic { top: 15%; }
+#photo-pair-1 .pair-text { top: 30%; }
+
+#photo-pair-2 .left-pic { top: 25%; }
+#photo-pair-2 .right-pic { top: 25%; }
+#photo-pair-2 .pair-text { top: 40%; }
+
+#photo-pair-3 .left-pic { top: 35%; }
+#photo-pair-3 .right-pic { top: 35%; }
+#photo-pair-3 .pair-text { top: 50%; }
+
+#photo-pair-4 .left-pic { top: 45%; }
+#photo-pair-4 .right-pic { top: 45%; }
+#photo-pair-4 .pair-text { top: 60%; }
+
+/* Scroll text */
+#scroll-text {
+    position: fixed;
+    top: -100px;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    font-family: 'Amatic SC', cursive;
+    font-size: 60px;
+    color: #FFD700;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.7), 2px 2px 4px #000;
+    z-index: 15; /* Higher than photo pairs */
+    opacity: 0;
+    transition: all 1.2s ease;
+    text-align: center;
+    width: 100%;
+    max-width: 800px;
+    animation: glow 2s infinite alternate;
+}
+
+#scroll-text.active {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+@keyframes glow {
+    from {
+        text-shadow: 0 0 10px rgba(255, 215, 0, 0.7), 0 0 20px rgba(255, 215, 0, 0.5), 2px 2px 4px #000;
+    }
+    to {
+        text-shadow: 0 0 15px rgba(255, 215, 0, 0.9), 0 0 30px rgba(255, 215, 0, 0.7), 2px 2px 4px #000;
+    }
+}
+
+/* Pair text styles */
+.pair-text {
+    position: absolute;
+    left: 50%;
+    top: 30%;
+    transform: translate(-50%, -50%) scale(0);
+    font-family: 'Amatic SC', cursive;
+    font-size: 48px;
+    color: #FFD700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    z-index: 10;
+    opacity: 0;
+    transition: all 1s ease;
+    text-align: center;
+    width: 80%;
+    max-width: 600px;
+    pointer-events: none;
+}
+
+.photo-pair.active .pair-text {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    transition-delay: 0.3s;
+}
+
+/* Media queries for responsive design */
+/* Tablets */
+@media screen and (max-width: 1024px) {
+    #night-mode, #music-toggle {
+        padding: 12px 15px; /* Slightly larger for better touch targets */
+    }
+    
+    .left-pic, .right-pic {
+        width: 150px;
+    }
+    
+    #scroll-text {
+        font-size: 40px;
+        padding: 0 20px;
+    }
+    
+    .pair-text {
+        font-size: 40px;
+    }
+}
+
+/* Large mobile phones */
+@media screen and (max-width: 768px) {
+    #night-mode, #music-toggle {
+        padding: 12px 16px; /* Increased padding for better touch targets */
+        font-size: 16px; /* Slightly larger font for better readability */
+        min-width: 80px;
+    }
+    
+    .left-pic, .right-pic {
+        width: 120px;
+    }
+    
+    #scroll-text {
+        font-size: 36px;
+        width: 85%;
+        padding: 0 15px;
+    }
+    
+    #photo-pair-1 .left-pic, #photo-pair-2 .left-pic, 
+    #photo-pair-3 .left-pic, #photo-pair-4 .left-pic {
+        left: -150px;
+    }
+    
+    #photo-pair-1 .right-pic, #photo-pair-2 .right-pic,
+    #photo-pair-3 .right-pic, #photo-pair-4 .right-pic {
+        right: -150px;
+    }
+    
+    .photo-pair.active .left-pic {
+        transform: translateX(180px);
+    }
+    
+    .photo-pair.active .right-pic {
+        transform: translateX(-180px);
+    }
+    
+    .pair-text {
+        font-size: 36px;
+        width: 90%;
+    }
+}
+
+/* Medium mobile phones */
+@media screen and (max-width: 480px) {
+    #night-mode, #music-toggle {
+        padding: 7px 10px;
+        font-size: 14px;
+        min-width: 70px;
+    }
+    
+    #night-mode {
+        top: 10px;
+        right: 10px;
+    }
+    
+    #music-toggle {
+        top: 10px;
+        left: 10px;
+    }
+    
+    .left-pic, .right-pic {
+        width: 100px;
+    }
+    
+    #photo-pair-1 .left-pic, #photo-pair-2 .left-pic, 
+    #photo-pair-3 .left-pic, #photo-pair-4 .left-pic {
+        left: -120px;
+    }
+    
+    #photo-pair-1 .right-pic, #photo-pair-2 .right-pic,
+    #photo-pair-3 .right-pic, #photo-pair-4 .right-pic {
+        right: -120px;
+    }
+    
+    .photo-pair.active .left-pic {
+        transform: translateX(130px);
+    }
+    
+    .photo-pair.active .right-pic {
+        transform: translateX(-130px);
+    }
+    
+    #scroll-text {
+        font-size: 32px;
+        width: 80%;
+        padding: 0 10px;
+    }
+    
+    .pair-text {
+        font-size: 30px;
+        width: 95%;
+    }
+}
+
+/* Small mobile phones */
+@media screen and (max-width: 375px) {
+    #night-mode, #music-toggle {
+        padding: 6px 8px;
+        font-size: 12px;
+        min-width: 60px;
+    }
+    
+    #night-mode {
+        top: 8px;
+        right: 8px;
+    }
+    
+    #music-toggle {
+        top: 8px;
+        left: 8px;
+    }
+    
+    .left-pic, .right-pic {
+        width: 80px;
+    }
+    
+    #photo-pair-1 .left-pic, #photo-pair-2 .left-pic, 
+    #photo-pair-3 .left-pic, #photo-pair-4 .left-pic {
+        left: -100px;
+    }
+    
+    #photo-pair-1 .right-pic, #photo-pair-2 .right-pic,
+    #photo-pair-3 .right-pic, #photo-pair-4 .right-pic {
+        right: -100px;
+    }
+    
+    .photo-pair.active .left-pic {
+        transform: translateX(110px);
+    }
+    
+    .photo-pair.active .right-pic {
+        transform: translateX(-110px);
+    }
+    
+    #scroll-text {
+        font-size: 28px;
+        width: 90%;
+        padding: 0 8px;
+    }
+    
+    .pair-text {
+        font-size: 24px;
+    }
+}
+
+/* Extra small mobile phones */
+@media screen and (max-width: 320px) {
+    #night-mode, #music-toggle {
+        padding: 5px 7px;
+        font-size: 11px;
+        min-width: 50px;
+    }
+    
+    .left-pic, .right-pic {
+        width: 70px;
+    }
+    
+    #photo-pair-1 .left-pic, #photo-pair-2 .left-pic, 
+    #photo-pair-3 .left-pic, #photo-pair-4 .left-pic {
+        left: -80px;
+    }
+    
+    #photo-pair-1 .right-pic, #photo-pair-2 .right-pic,
+    #photo-pair-3 .right-pic, #photo-pair-4 .right-pic {
+        right: -80px;
+    }
+    
+    .photo-pair.active .left-pic {
+        transform: translateX(90px);
+    }
+    
+    .photo-pair.active .right-pic {
+        transform: translateX(-90px);
+    }
+    
+    #scroll-text {
+        font-size: 24px;
+        padding: 0 5px;
+    }
+    
+    .pair-text {
+        font-size: 20px;
+    }
+}
+
+/* Portrait orientation adjustments */
+@media screen and (orientation: portrait) {
+    .left-pic {
+        top: 40%;
+    }
+    
+    .right-pic {
+        top: 60%;
+    }
+    
+    #scroll-text {
+        top: 20%;
+    }
+}
+
+/* Landscape orientation on small height devices */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+    #night-mode {
+        top: 5px;
+        right: 5px;
+    }
+    
+    #music-toggle {
+        top: 5px;
+        left: 5px;
+    }
+    
+    .left-pic, .right-pic {
+        width: 80px;
+    }
+    
+    .left-pic {
+        top: 15%;
+    }
+    
+    .right-pic {
+        top: 15%;
+    }
+    
+    #scroll-text {
+        font-size: 24px;
+        top: 10%;
+    }
+}
+
+/* Touch device specific optimizations */
+@media (hover: none) {
+    #night-mode:hover, #music-toggle:hover {
+        transform: none; /* Disable hover effects on touch devices */
+        background: rgba(255, 215, 0, 0.8);
+    }
+    
+    #night-mode:active, #music-toggle:active {
+        transform: scale(0.98); /* Simple scale effect for touch */
+        background: rgba(255, 215, 0, 0.9);
+    }
+    
+    /* Increase tap target sizes */
+    #night-mode, #music-toggle {
+        padding: 14px 20px;
+    }
+    
+    /* Fix for iOS/Safari display issues */
+    #container {
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+    }
+}
+
+/* Smaller screens */
+@media (max-width: 768px) {
+    /* Normal mobile styles only */
+}

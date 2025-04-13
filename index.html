@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Tangled-Inspired 3D Forest</title>
+        <link rel="stylesheet" href="style.css">
+        <script type="module" src="https://cdn.jsdelivr.net/npm/three@0.163.0/build/three.module.js"></script>
+        <script type="module" src="./three-csg-ts.js"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div id="container"></div>
+        <button id="night-mode">Toggle Night Mode</button>
+        <button id="music-toggle">Toggle Music</button>
+        <audio id="background-music" loop>
+            <source src="رابونزل  وأخيرا شفت النور  مصري.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        
+        <!-- Replace the single pair with 4 pairs of photos -->
+        <div class="photo-pair" id="photo-pair-1">
+            <img class="left-pic" src="6.jpeg" alt="Rapunzel 1 Left">
+            <img class="right-pic" src="7.jpeg" alt="Rapunzel 1 Right">
+            <div class="pair-text">They say Feb 29 comes every four years,
+                But for me, it came just once
+                and nevermore</div>
+        </div>
+        
+        <div class="photo-pair" id="photo-pair-2">
+            <img class="left-pic" src="1.jpeg" alt="Rapunzel 2 Left">
+            <img class="right-pic" src="3.jpeg" alt="Rapunzel 2 Right">
+            <div class="pair-text">Countless stars shine in the skies,
+                Yet I was lucky to fall for the light in your eyes.</div>
+        </div>
+        
+        <div class="photo-pair" id="photo-pair-3">
+            <img class="left-pic" src="2.jpeg" alt="Rapunzel 3 Left">
+            <img class="right-pic" src="4.jpeg" alt="Rapunzel 3 Right">
+            <div class="pair-text">They call it just another date, but they don’t know—
+                it was the day my heart found where it belongs.</div>
+        </div>
+        
+        <div class="photo-pair" id="photo-pair-4">
+            <img class="left-pic" src="5.jpeg" alt="Rapunzel 4 Left">
+            <img class="right-pic" src="8.jpeg" alt="Rapunzel 4 Right">
+            <div class="pair-text">Angels were made before humankind, it’s true,
+                But on April 14, god made one just for me, YOU.</div>
+        </div>
+        
+        <div id="scroll-text">Happy Birthday, My Rapunzel!</div>
+        <script type="module" src="main.js"></script>
+    </body>
+</html>
