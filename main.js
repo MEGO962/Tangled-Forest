@@ -854,6 +854,7 @@ const photoPairs = [
 ];
 
 const scrollText = document.getElementById('scroll-text');
+const endVideo = document.getElementById('end-video');
 
 window.addEventListener('scroll', () => {
     const scrollY = window.scrollY;
@@ -877,13 +878,13 @@ window.addEventListener('scroll', () => {
         }
     });
     
-    // Handle scroll text - show only when we've reached the end of the path
+    // Handle scroll text and video - show only when we've reached the end of the path
     if (targetT >= 0.98) {
         scrollText.classList.add('active');
-        scrollText.style.top = '50%'; // Position in the center
+        endVideo.classList.add('active');
     } else {
         scrollText.classList.remove('active');
-        scrollText.style.top = '-100px';
+        endVideo.classList.remove('active');
     }
 });
 
@@ -944,13 +945,13 @@ document.addEventListener('touchmove', (e) => {
             }
         });
         
-        // Handle scroll text - show only when we've reached the end of the path
+        // Handle scroll text and video - show only when we've reached the end of the path
         if (targetT >= 0.98) {
             scrollText.classList.add('active');
-            scrollText.style.top = '50%'; // Position in the center
+            endVideo.classList.add('active');
         } else {
             scrollText.classList.remove('active');
-            scrollText.style.top = '-100px';
+            endVideo.classList.remove('active');
         }
     }
 }, { passive: true });
